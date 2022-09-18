@@ -5,12 +5,23 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main {
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args){
+    final var server = new Server();
+    // код инициализации сервера (из вашего предыдущего ДЗ)
 
-    ExecutorService es = Executors.newFixedThreadPool(64);
+    // добавление handler'ов (обработчиков)
+    server.addHandler("GET", "/messages", new Handler() {
+      public void handle(Request request, BufferedOutputStream responseStream) {
+        // TODO: handlers code
+      }
+    });
+    server.addHandler("POST", "/messages", new Handler() {
+      public void handle(Request request, BufferedOutputStream responseStream) {
+        // TODO: handlers code
+      }
+    });
 
-    es.submit(new Server(9999));
-    es.shutdown();
+    server.listen(9999);
   }
 }
 
