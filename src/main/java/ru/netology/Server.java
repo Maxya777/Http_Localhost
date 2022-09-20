@@ -100,4 +100,8 @@ public class Server implements Runnable {
             e.printStackTrace();
         }
     }
+
+    private void addHandler(String GET, String message, Handler handler) {
+
+    }
 }
