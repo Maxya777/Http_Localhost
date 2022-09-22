@@ -7,10 +7,9 @@ import java.util.concurrent.Executors;
 public class Main {
   public static void main(String[] args) throws IOException {
 
-    ExecutorService es = Executors.newFixedThreadPool(64);
+    final var server = new Server();
 
-    es.submit(new Server(9999));
-    es.shutdown();
+    server.listen(9999);
   }
 }
 

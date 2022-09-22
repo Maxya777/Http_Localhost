@@ -11,26 +11,25 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class Server implements Runnable {
+public class Server {
 
     ServerSocket serverSocket;
-    boolean keepProcessing = true;
     final List<String> validPaths = List.of("/index.html", "/spring.svg", "/spring.png", "/resources.html", "/styles.css", "/app.js", "/links.html", "/forms.html", "/classic.html", "/events.html", "/events.js");
 
+    public void listen(int port) throws IOException {
 
-    public Server(int port) throws IOException {
         serverSocket = new ServerSocket(port);
-    }
-
-    @Override
-    public void run() {
+        ExecutorService es = Executors.newFixedThreadPool(64);
         System.out.print("Server Starting\n");
-        while (keepProcessing) {
+
+        while (true) {
             try {
                 System.out.print("accepting client\n");
                 Socket socket = serverSocket.accept();
-                requestProcess(socket);
+                es.submit(() -> requestProcess(socket));
             } catch (Exception e) {
                 handle(e);
             }
