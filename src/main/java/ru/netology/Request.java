@@ -2,12 +2,19 @@ package ru.netology;
 
 public class Request {
 
-    protected final String GET = "GET";
-    protected final String POST = "POST";
-    private final String message;
-    private final static String DELIMITER = "\r\n\r\n";
+    String method;
+    String path;
 
-    public Request(String message) {
-        this.message = message;
+    public Request(String method, String path) {
+        this.method = method;
+        this.path = path;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public String getPath() {
+        return path;
     }
 }
