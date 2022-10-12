@@ -11,7 +11,7 @@ public class Main {
         Server server = new Server();
 
         server.addHandler("GET", "/messages", (request, out) -> {
-            var message = "Hello, my name is Maxim. This is GET request!";
+            var message = "Hello, my name is Maxim. This is GET Query Params: " + request.getQueryParams();
             try {
                 out.write((
                         "HTTP/1.1 200 OK\r\n" +
@@ -27,7 +27,7 @@ public class Main {
             }
         });
         server.addHandler("POST", "/messages", (request, out) -> {
-            var message = "Hello, my name is Maxim. This is POST request!";
+            var message = "Hello, my name is Maxim. This is POST Query Params: " + request.getQueryParams();
             try {
                 out.write((
                         "HTTP/1.1 200 OK\r\n" +
